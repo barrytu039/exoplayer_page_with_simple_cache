@@ -1,0 +1,3 @@
+include ':codebase'
+include ':app'
+rootProject.name = "ExoPlayerPage"
