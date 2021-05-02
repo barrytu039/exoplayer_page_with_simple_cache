@@ -20,9 +20,7 @@ import java.io.File
 
 class VideoActivity : BaseActivity() {
 
-    private val cacheSize: Long = 3221225472L // 3GB
     private lateinit var simpleExoPlayer: SimpleExoPlayer
-    private lateinit var simpleCache: SimpleCache
 
     companion object {
         const val BUNDLE_VIDEO_URL = "BUNDLE_VIDEO_URL"
@@ -44,19 +42,19 @@ class VideoActivity : BaseActivity() {
 
         exoPlayerView.player = simpleExoPlayer
 
-        val cacheFolder = File(this.filesDir, "media")
-
-        val cacheEvictor = LeastRecentlyUsedCacheEvictor(cacheSize)
-
-        val dataBaseProvider = ExoDatabaseProvider(this)
-
-        simpleCache = SimpleCache(cacheFolder, cacheEvictor, dataBaseProvider)
+//        val cacheFolder = File(this.filesDir, "media")
+//
+//        val cacheEvictor = LeastRecentlyUsedCacheEvictor(cacheSize)
+//
+//        val dataBaseProvider = ExoDatabaseProvider(this)
+//
+//        simpleCache = SimpleCache(cacheFolder, cacheEvictor, dataBaseProvider)
 
         val dataSourceFactory =
             DefaultDataSourceFactory(this, Util.getUserAgent(this, getString(R.string.app_name)))
 
         val cacheDataSourceFactory = CacheDataSource.Factory().apply {
-            setCache(simpleCache)
+            setCache(AppApplication.createSimpleCache())
             setUpstreamDataSourceFactory(dataSourceFactory)
         }
 
@@ -82,6 +80,6 @@ class VideoActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         simpleExoPlayer.release()
-        simpleCache.release()
+        AppApplication.releaseSimpleCache()
     }
 }
