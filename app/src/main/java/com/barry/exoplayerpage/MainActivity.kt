@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
 
             val intent = Intent(this, VideoActivity::class.java)
 
-            intent.putExtra(BUNDLE_VIDEO_URL,"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4")
+            intent.putExtra(BUNDLE_VIDEO_URL,"https://kps-dev.thekono.com/api/v1/projects/61398d3c62cbe46b8b9e58af/streams/624f2396246758000ebcd3c9/playlist.m3u8")
 
             startActivity(intent)
 
