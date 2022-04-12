@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ExoPlayerPage</string>
+    <string name="audio_channel_name">Audio Channel Name</string>
+    <string name="audio_channel_desc">Audio Channel Desc</string>
 </resources>
