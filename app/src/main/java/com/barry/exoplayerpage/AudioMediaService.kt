@@ -214,15 +214,22 @@ class AudioMediaService : MediaBrowserServiceCompat(), CoroutineScope by MainSco
                     setUpstreamDataSourceFactory(dataSourceFactory)
                 }
                 val mediaItem = MediaItem.Builder().setUri(uri)
-                    .setMediaMetadata(MediaMetadata.Builder().setTitle(title).setAlbumTitle(album).build())
+                    .setMediaMetadata(MediaMetadata.Builder().setDisplayTitle(title).setAlbumTitle(album).build())
                     .setMimeType(MimeTypes.APPLICATION_M3U8)
                     .build()
 
                 val audioDataSource = HlsMediaSource.Factory(cacheDataSourceFactory)
                     .createMediaSource(mediaItem)
-                currentPlayer.playWhenReady = true
-                exoPlayer.setMediaSource(audioDataSource)
-                exoPlayer.prepare()
+
+                if (exoPlayer.mediaItemCount == 0) {
+                    exoPlayer.addMediaSource(audioDataSource)
+                    exoPlayer.playWhenReady = true
+                    exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
+                    exoPlayer.prepare()
+                } else {
+                    exoPlayer.prepare(audioDataSource)
+                }
+
             }
         }
 

@@ -31,7 +31,7 @@ class VideoActivity : BaseActivity() {
                 val bundle = Bundle()
                 bundle.putString("title", "KPS Title")
                 bundle.putString("album", "KPS Album")
-                connection.transportControls.playFromUri(Uri.parse("https://kps-dev.thekono.com/api/v1/projects/61398d3c62cbe46b8b9e58af/streams/62554381d67b7f000e698627/playlist.m3u8"), bundle)
+                connection.transportControls.playFromUri(Uri.parse("https://kps-dev.thekono.com/api/v1/projects/61398d3c62cbe46b8b9e58af/streams/6255adcafac0a7000ef84c8d/playlist.m3u8"), bundle)
             }
         }
 
